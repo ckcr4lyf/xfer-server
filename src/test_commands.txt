@@ -1,0 +1,2 @@
+echo -n -e "\x00\x04\x41\x41\x41\x41\x10\x20\x30\x40" | nc 127.0.0.1 3333
+Size = 0x0004 (4bytes), filename = 0x41414141 (AAAA), data = 0x10203040
