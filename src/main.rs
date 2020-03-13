@@ -18,7 +18,7 @@ fn handle_client(mut stream: TcpStream){
     let mut size_header = [0 as u8; 2]; //First two bytes are size of filename. (NOT THE FILE)
     match stream.read_exact(&mut size_header) {
         Ok(_) => {
-            println!("Legit");
+            // println!("Legit");
         },
         Err(_) => {
             println!("We fucked up");
@@ -41,7 +41,7 @@ fn handle_client(mut stream: TcpStream){
 
     let mut f2 = File::create(str::from_utf8(&filename).unwrap()).unwrap();
 
-    let mut data = [0 as u8; 1024]; // using 50 byte buffer at a time
+    let mut data = [0 as u8; 1024]; // using 1024 byte buffer at a time
     'damn: while match stream.read(&mut data) {
         Ok(size) => {
             if size == 0 {
@@ -60,7 +60,7 @@ fn handle_client(mut stream: TcpStream){
         }
     } {}
 
-    println!("Exited while");
+    println!("Finished downloading file {}", str::from_utf8(&filename).unwrap());
     // let mut file = File::create("data.bin").unwrap();
     f2.write(&binary).unwrap(); //Write data to the file
 }
